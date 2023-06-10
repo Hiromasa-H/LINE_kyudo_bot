@@ -13,3 +13,12 @@
   - 動画は短く、30秒程度に納めてください
   - なるべく他の人が写っていないようにしてください
   - 全身が写っているようにしてください
+
+## 開発環境
+
+- `bash setup.sh`で必要なパッケージをインストールし、必要なファイルが作成できます。
+- `python3 app.py`で起動します。
+- `ngrok`を使って、外部からアクセスできるようにしてください。
+  - `ngrok http 5000`で起動します。
+  - `https://xxxxxxxx.ngrok.io/callback`を、LINE DevelopersのWebhook URLに設定してください。
+  - また、.envファイルの`CURRENT_URL`にも設定してください。
