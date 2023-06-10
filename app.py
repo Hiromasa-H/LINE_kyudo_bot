@@ -16,6 +16,11 @@ CURRENT_URL = os.getenv("CURRENT_URL")
 def webhook():
     if request.method == 'POST':
         data = request.get_json()
+
+        if len(data['events']) == 0:
+            response = {'message': 'Webhook received'}
+            return response
+
         replyToken = data['events'][0]['replyToken']
         
         if data['events'][0]['message']['type'] == 'video':
