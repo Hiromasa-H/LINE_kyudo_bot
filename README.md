@@ -2,7 +2,7 @@
 
 弓道姿勢推定用のLINE bot。まだ開発中なので、長い動画や、条件に則さない動画を送った場合、正常に動作しない可能性があります。
 
-<img src="md_resources/chat_sample.jpg" width="300px" alt="Image">
+<img src="md_resources/chat_sample.png" width="300px" alt="Image">
 
 
 ## 使い方
