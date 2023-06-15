@@ -22,32 +22,34 @@ def webhook():
             return response
 
         replyToken = data['events'][0]['replyToken']
+        print("reply token:",replyToken)
         
         if data['events'][0]['message']['type'] == 'video':
             messageId = data['events'][0]['message']['id']
+            print("messageId token:",messageId)
             download_video(messageId, CHANNEL_ACCESS_TOKEN)
             process_video(messageId)
             convert_images_to_video(messageId,f"videos/output_{messageId}.mp4", 30)
             delete_directory_contents(f"frames/{messageId}")
             print("video created")
             url, headers, data = create_video_response(messageId, replyToken, CHANNEL_ACCESS_TOKEN, CURRENT_URL)
-            response = requests.post(url, headers=headers, json=data)
+            # response = requests.post(url, headers=headers, json=data)
             
             # delete frames and original video
-            # os.remove(f"download/video_{messageId}.mp4")
+            os.remove(f"download/video_{messageId}.mp4")
             # os.remove(f"images/output_{messageId}.jpg")
             # os.remove(f"videos/output_{messageId}.mp4")
             # urllib.image_dir, output_video_path, fpsrequest.urlretrieve(url_link, 'video_name.mp4') 
-            #response = {'message': 'Webhook received'}
+            response = {'message': 'Webhook received'}
 
             return response #jsonify(response)
         else:
-            url, headers, data = create_text_response(replyToken, CHANNEL_ACCESS_TOKEN)
-            response = requests.post(url, headers=headers, json=data)
+            # url, headers, data = create_text_response(replyToken, CHANNEL_ACCESS_TOKEN)
+            # response = requests.post(url, headers=headers, json=data)
             
             # data = request.get_json()
             # print(data)
-            # response = {'message': 'Webhook received'}
+            response = {'message': 'Webhook received'}
             return response
     elif request.method == 'GET':
         return 'Hello World'
@@ -61,12 +63,14 @@ def webhook():
 @app.route('/images/<image_id>')
 def serve_image(image_id):
     # Determine the filename based on the image_id
+    print("they came for the image")
     filename = f"output_{image_id}.jpg"
     return send_from_directory('images', filename)
 
 @app.route('/videos/<video_id>')
 def serve_video(video_id):
     # Determine the filename based on the video_id
+    print("they came for the vid")
     filename = f"output_{video_id}.mp4"
     return send_from_directory('videos', filename)
 

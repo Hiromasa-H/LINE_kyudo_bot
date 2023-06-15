@@ -147,7 +147,7 @@ def create_video_response(message_id, response_id, channel_access_token,current_
         'replyToken': response_id,
         'messages': [
             {
-             "type": "video",
+            "type": "video",
             "originalContentUrl": f"{current_url}/videos/{message_id}",
             "previewImageUrl": f"{current_url}/images/{message_id}"
             }
